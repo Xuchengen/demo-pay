@@ -1,0 +1,15 @@
+# spring框架相关配置
+spring:
+  jackson:
+    time-zone: GMT+8
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+# Servlet容器相关配置
+server:
+  use-forward-headers: true
+
+# beetl模板引擎
+beetlsql:
+  enabled: false
+beetl:
+  suffix: html
