@@ -1,6 +1,6 @@
 language: java
 
-sudo: false # faster builds
+sudo: false
 
 install: false
 
