@@ -5,7 +5,7 @@ sudo: false # faster builds
 install: false
 
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 notifications:
   email: false
@@ -14,6 +14,3 @@ cache:
   directories:
     - '$HOME/.m2'
 
-script:
-  - export TZ=Asia/Shanghai
-  - mvn clean
