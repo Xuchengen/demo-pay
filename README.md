@@ -1,4 +1,4 @@
-<p align="center"><font size="35">支付演示</font></p>
+<p style="font-size: 35px;font-weight: bold;text-align: center">支付演示</p>
 
 -------------------------------------------------------------------------------
 
