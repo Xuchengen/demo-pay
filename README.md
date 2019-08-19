@@ -4,4 +4,4 @@
 ## 关于条码支付(被扫模式)
 在工程测试包内提供了一个简易的条码扫描枪模拟器。利用投屏软件将手机客户端收款码界面投射到桌面上，使用模拟扫描器识别二维码/条形码然后创建订单发起支付动作进行扣款。
 
-![条码扫描枪模拟器](https://github.com/Xuchengen/demo-pay/asset/scan_tool.png)
+<img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/scan_tool.jpg" width="50%" alt="条码扫描枪模拟器">
