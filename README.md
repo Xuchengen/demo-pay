@@ -1,6 +1,19 @@
-<p style="font-size: 35px;font-weight: bold;text-align: center">支付演示</p>
+# 支付演示
 
--------------------------------------------------------------------------------
+<p align="center">
+	<a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.html">
+		<img src="https://img.shields.io/:license-apache-blue.svg"/>
+	</a>
+	<a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/JDK-1.8+-green.svg"/>
+	</a>
+	<a target="_blank" href="https://travis-ci.org/Xuchengen/demo-pay">
+		<img src="https://travis-ci.org/Xuchengen/demo-pay.svg?branch=master"/>
+	</a>
+	<a target="_blank" href='https://github.com/Xuchengen/demo-pay'>
+		<img src="https://img.shields.io/github/stars/Xuchengen/demo-pay?style=social" alt="github star"/>
+	</a>
+</p>
 
 ## 简介
 支付演示是一个集成支付宝、微信、银联云闪付等第三方支付系统接口的一个集成环境便于一些新手开发者快速学习和测试。
