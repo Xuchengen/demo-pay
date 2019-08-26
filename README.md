@@ -24,7 +24,14 @@
 <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/scan_tool.jpg" width="50%" alt="条码扫描枪模拟器">
 
 ## 开发状态
-支付演示系统仍然处于开发阶段，现阶段已经集成支付宝。
+支付演示系统仍然处于开发阶段，现阶段已经集成支付宝、银联。
+
+## 支付接口申请
+支付宝目前支持个人申请当面付收单接口，费率为0.6。
+
+提供一张可以申请支付宝当面付的商户门头照
+
+<img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/apply.jpg" width="50%" alt="商户门头照">
 
 ## 特别鸣谢
 * <a href="https://github.com/looly/hutool">Hutool</a>
