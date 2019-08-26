@@ -1,0 +1,19 @@
+
+// ============= 证书  ============= 
+//多证书签名： 
+//Map<String, String> reqData = AcpService.signByCertInfo(data,"D:/certs/acp_test_sign.pfx", "000000", "utf-8");
+		
+//多证书解密：
+//Map<String, String> customerInfo = AcpService.parseCustomerInfo(customerInfo, "D:/certs/acp_test_sign.pfx", "000000", "utf-8");
+//String accNo = AcpService.decryptData(accNo1, "D:/certs/acp_test_sign.pfx", "000000", "utf-8");
+
+
+
+// ============= 密钥  ============= 
+//多密钥签名：
+//Map<String, String> submitFromData = AcpService.signBySecureKey(data, "88888888", "utf-8");
+
+//多密钥验签：
+//AcpService.validateBySecureKey(rspData, "88888888", "utf-8");
+
+
