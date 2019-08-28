@@ -26,6 +26,8 @@
 ## 开发状态
 支付演示系统仍然处于开发阶段，现阶段已经集成支付宝、银联。
 
+最近在封装银联官方SDK所以提交代码不太勤。
+
 ## 支付接口申请
 支付宝目前支持个人申请当面付收单接口，费率为0.6。
 
@@ -34,8 +36,10 @@
 <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/apply.jpg" width="50%" alt="商户门头照">
 
 ## 特别鸣谢
-* <a href="https://github.com/looly/hutool">Hutool</a>
+* <a href="https://github.com/looly/hutool" title="一套保持Java甜蜜的工具">Hutool</a>
 
-* <a href="http://ibeetl.com/">Beetl</a>
+* <a href="http://ibeetl.com/" title="Beetl国产高性能Java模板引擎">Beetl</a>
+
+* <a href="https://github.com/Javen205/IJPay" title="IJPay让支付触手可及">IJPay</a>
 
 以上排名不分先后。
