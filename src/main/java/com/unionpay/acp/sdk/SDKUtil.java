@@ -1,11 +1,11 @@
 /**
  *
  * Licensed Property to China UnionPay Co., Ltd.
- * 
+ *
  * (C) Copyright of China UnionPay Co., Ltd. 2010
  *     All Rights Reserved.
  *
- * 
+ *
  * Modification History:
  * =============================================================================
  *   Author         Date          Description
@@ -47,7 +47,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 /**
- * 
+ *
  * @ClassName SDKUtil
  * @Description acpsdk工具类
  * @date 2016-7-22 下午4:06:18
@@ -57,7 +57,7 @@ public class SDKUtil {
 
 	/**
 	 * 根据signMethod的值，提供三种计算签名的方法
-	 * 
+	 *
 	 * @param data
 	 *            待签名数据Map键值对形式
 	 * @param encoding
@@ -65,7 +65,7 @@ public class SDKUtil {
 	 * @return 签名是否成功
 	 */
 	public static boolean sign(Map<String, String> data, String encoding) {
-		
+
 		if (isEmpty(encoding)) {
 			encoding = "UTF-8";
 		}
@@ -75,7 +75,7 @@ public class SDKUtil {
 			LogUtil.writeErrorLog("signMethod must Not null");
 			return false;
 		}
-		
+
 		if (isEmpty(version)) {
 			LogUtil.writeErrorLog("version must Not null");
 			return false;
@@ -140,7 +140,7 @@ public class SDKUtil {
 
 	/**
 	 * 通过传入的证书绝对路径和证书密码读取签名证书进行签名并返回签名值<br>
-	 * 
+	 *
 	 * @param data
 	 *            待签名数据Map键值对形式
 	 * @param encoding
@@ -153,7 +153,7 @@ public class SDKUtil {
 	 */
 	public static boolean signBySecureKey(Map<String, String> data, String secureKey,
 			String encoding) {
-		
+
 		if (isEmpty(encoding)) {
 			encoding = "UTF-8";
 		}
@@ -166,7 +166,7 @@ public class SDKUtil {
 			LogUtil.writeErrorLog("signMethod must Not null");
 			return false;
 		}
-		
+
 		if (SIGNMETHOD_SHA256.equals(signMethod)) {
 			// 将Map信息转换成key1=value1&key2=value2的形式
 			String stringData = coverMap2String(data);
@@ -195,7 +195,7 @@ public class SDKUtil {
 
 	/**
 	 * 通过传入的签名密钥进行签名并返回签名值<br>
-	 * 
+	 *
 	 * @param data
 	 *            待签名数据Map键值对形式
 	 * @param encoding
@@ -208,7 +208,7 @@ public class SDKUtil {
 	 */
 	public static boolean signByCertInfo(Map<String, String> data,
 			String certPath, String certPwd, String encoding) {
-		
+
 		if (isEmpty(encoding)) {
 			encoding = "UTF-8";
 		}
@@ -226,7 +226,7 @@ public class SDKUtil {
 			LogUtil.writeErrorLog("version must Not null");
 			return false;
 		}
-		
+
 		if (SIGNMETHOD_RSA.equals(signMethod) || VERSION_1_0_0.equals(version) || VERSION_5_0_1.equals(version)) {
 			if (VERSION_5_0_0.equals(version) || VERSION_1_0_0.equals(version) || VERSION_5_0_1.equals(version)) {
 				// 设置签名证书序列号
@@ -273,14 +273,14 @@ public class SDKUtil {
 					return false;
 				}
 			}
-			
-		} 
+
+		}
 		return false;
 	}
-	
+
 	/**
 	 * 验证签名
-	 * 
+	 *
 	 * @param resData
 	 *            返回报文数据
 	 * @param encoding
@@ -322,10 +322,10 @@ public class SDKUtil {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 验证签名
-	 * 
+	 *
 	 * @param resData
 	 *            返回报文数据
 	 * @param encoding
@@ -375,7 +375,7 @@ public class SDKUtil {
 					LogUtil.writeErrorLog("验证公钥证书失败，证书信息：["+strCert+"]");
 					return false;
 				}
-				
+
 				// 3.验签
 				String stringSign = resData.get(SDKConstants.param_signature);
 				LogUtil.writeLog("签名原文：["+stringSign+"]");
@@ -435,7 +435,7 @@ public class SDKUtil {
 
 	/**
 	 * 将Map中的数据转换成key1=value1&key2=value2的形式 不包含签名域signature
-	 * 
+	 *
 	 * @param data
 	 *            待拼接的Map数据
 	 * @return 拼接好后的字符串
@@ -463,7 +463,7 @@ public class SDKUtil {
 
 	/**
 	 * 兼容老方法 将形如key=value&key=value的字符串转换为相应的Map对象
-	 * 
+	 *
 	 * @param result
 	 * @return
 	 */
@@ -473,7 +473,7 @@ public class SDKUtil {
 
 	/**
 	 * 将形如key=value&key=value的字符串转换为相应的Map对象
-	 * 
+	 *
 	 * @param result
 	 * @return
 	 */
@@ -490,10 +490,10 @@ public class SDKUtil {
 		return map;
 	}
 
-	
+
 	/**
 	 * 解析应答字符串，生成应答要素
-	 * 
+	 *
 	 * @param str
 	 *            需要解析的字符串
 	 * @return 解析的结果map
@@ -513,8 +513,8 @@ public class SDKUtil {
 			for (int i = 0; i < len; i++) {// 遍历整个带解析的字符串
 				curChar = str.charAt(i);// 取当前字符
 				if (isKey) {// 如果当前生成的是key
-					
-					if (curChar == '=') {// 如果读取到=分隔符 
+
+					if (curChar == '=') {// 如果读取到=分隔符
 						key = temp.toString();
 						temp.setLength(0);
 						isKey = false;
@@ -526,7 +526,7 @@ public class SDKUtil {
 						if(curChar == openName){
 							isOpen = false;
 						}
-						
+
 					}else{//如果没开启嵌套
 						if(curChar == '{'){//如果碰到，就开启嵌套
 							isOpen = true;
@@ -537,7 +537,7 @@ public class SDKUtil {
 							openName =']';
 						}
 					}
-					
+
 					if (curChar == '&' && !isOpen) {// 如果读取到&分割符,同时这个分割符不是值域，这时将map里添加
 						putKeyValueToMap(temp, isKey, key, map);
 						temp.setLength(0);
@@ -546,7 +546,7 @@ public class SDKUtil {
 						temp.append(curChar);
 					}
 				}
-				
+
 			}
 			putKeyValueToMap(temp, isKey, key, map);
 		}
@@ -570,10 +570,10 @@ public class SDKUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * 获取应答报文中的加密公钥证书,并存储到本地,并备份原始证书<br>
 	 * 更新成功则返回1，无更新返回0，失败异常返回-1。
-	 * 
+	 *
 	 * @param resData
 	 * @param encoding
 	 * @return
@@ -629,10 +629,10 @@ public class SDKUtil {
 			return -1;
 		}
 	}
-	
+
 	/**
 	 * 文件拷贝方法
-	 * 
+	 *
 	 * @param srcFile
 	 *            源文件
 	 * @param destFile
@@ -689,10 +689,10 @@ public class SDKUtil {
 		}
 		return flag;
 	}
-	
+
 	/**
 	 * 写文件方法
-	 * 
+	 *
 	 * @param filePath
 	 *            文件路径
 	 * @param fileContent
@@ -709,7 +709,7 @@ public class SDKUtil {
 		if (file.exists()) {
 			file.delete();
 		}
-		
+
 		try {
 			fout = new FileOutputStream(filePath);
 			// 获取输出通道
@@ -738,11 +738,11 @@ public class SDKUtil {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 将传入的文件名(xxx)改名 <br>
 	 * 结果为： xxx_backup.cer
-	 * 
+	 *
 	 * @param fileName
 	 * @return
 	 */
@@ -755,7 +755,7 @@ public class SDKUtil {
 		String newFileName = leftFileName + "_backup" + POINT + rightFileName;
 		return newFileName;
 	}
-	
+
 
 	public static byte[] readFileByNIO(String filePath) {
 		FileInputStream in = null;
@@ -784,7 +784,7 @@ public class SDKUtil {
 			}
 		}
 	}
-	
+
 	/**
 	 * 过滤请求报文中的空字符串或者空字符串
 	 * @param contentData
@@ -794,7 +794,7 @@ public class SDKUtil {
 		LogUtil.writeLog("打印请求报文域 :");
 		Map<String, String> submitFromData = new HashMap<String, String>();
 		Set<String> keyset = contentData.keySet();
-		
+
 		for(String key:keyset){
 			String value = contentData.get(key);
 			if (value != null && !"".equals(value.trim())) {
@@ -805,10 +805,10 @@ public class SDKUtil {
 		}
 		return submitFromData;
 	}
-	
+
 	/**
 	 * 解压缩.
-	 * 
+	 *
 	 * @param inputByte
 	 *            byte[]数组类型的数据
 	 * @return 解压缩后的数据
@@ -840,7 +840,7 @@ public class SDKUtil {
 
 	/**
 	 * 压缩.
-	 * 
+	 *
 	 * @param inputByte
 	 *            需要解压缩的byte[]数组
 	 * @return 压缩后的数据
@@ -864,10 +864,10 @@ public class SDKUtil {
 		compresser.end();
 		return o.toByteArray();
 	}
-	
+
 	/**
 	 * 判断字符串是否为NULL或空
-	 * 
+	 *
 	 * @param s
 	 *            待判断的字符串数据
 	 * @return 判断结果 true-是 false-否
@@ -875,5 +875,5 @@ public class SDKUtil {
 	public static boolean isEmpty(String s) {
 		return null == s || "".equals(s.trim());
 	}
-	
+
 }
