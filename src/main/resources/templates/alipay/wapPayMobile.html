@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>支付宝-手机网站支付</title>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" href="https://gw.alipayobjects.com/as/g/antui/antui/10.1.32/rem/antui-all.css"/>
+    <script src="https://gw.alipayobjects.com/as/g/antui/antui/10.1.32/antui.js"></script>
+</head>
+<body ontouchstart="">
+<form method="post" action="/alipay/wapPay/doPay">
+    <div class="am-list am-list-form">
+        <div class="am-list-item am-input-autoclear">
+            <div class="am-list-label" id="list-label-4">订单号</div>
+            <div class="am-list-control">
+                <input id="demo-input-4" type="text" name="orderNo" placeholder="订单号" value=""
+                       aria-labelledby="list-label-4">
+            </div>
+            <div class="am-list-clear" tabindex="0" aria-label="清空输入框" aria-controls="demo-input-4">
+                <i class="am-icon-clear am-icon" aria-hidden="true"></i>
+            </div>
+            <a class="am-list-button">
+                <div class="am-icon captcha-refresh" tabindex="0" aria-label="获取订单号" id="getOrderNo"></div>
+            </a>
+        </div>
+        <div class="am-list-item am-input-autoclear">
+            <div class="am-list-label" id="list-label-5">商品名称</div>
+            <div class="am-list-control">
+                <input id="demo-input-5" type="text" name="subject" placeholder="商品名称" value="Mac Book Pro 2019"
+                       aria-labelledby="list-label-5">
+            </div>
+            <div class="am-list-clear" tabindex="0" aria-label="清空输入框" aria-controls="demo-input-5">
+                <i class="am-icon-clear am-icon" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="am-list-item am-input-autoclear">
+            <div class="am-list-label" id="list-label-6">商品价格</div>
+            <div class="am-list-control">
+                <input id="demo-input-6" type="number" name="totalAmount" placeholder="商品价格" value="0.01"
+                       aria-labelledby="list-label-6">
+            </div>
+            <div class="am-list-clear" tabindex="0" aria-label="清空输入框" aria-controls="demo-input-6">
+                <i class="am-icon-clear am-icon" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="am-list-item am-input-autoclear">
+            <div class="am-list-control">
+                <input id="demo-input-8" type="url" name="notifyUrl" placeholder="异步通知地址"
+                       value="${notifyUrl!}"
+                       aria-labelledby="list-label-8">
+            </div>
+            <div class="am-list-clear" tabindex="0" aria-label="清空输入框" aria-controls="demo-input-8">
+                <i class="am-icon-clear am-icon" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div class="am-list-item am-input-autoclear">
+            <div class="am-list-control">
+                <input id="demo-input-7" type="url" name="returnUrl" placeholder="同步通知地址"
+                       value="${returnUrl!}"
+                       aria-labelledby="list-label-7">
+            </div>
+            <div class="am-list-clear" tabindex="0" aria-label="清空输入框" aria-controls="demo-input-7">
+                <i class="am-icon-clear am-icon" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div class="am-button-wrap">
+        <button type="submit" class="am-button" role="button">确认支付</button>
+    </div>
+</form>
+<footer class="am-footer am-fixed am-fixed-bottom">
+    <div class="am-footer-copyright">&copy; 2004-2019 Alipay.com. All rights reserved.</div>
+</footer>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script>
+    $("#getOrderNo").on("click", function () {
+        $.post('/common/order/getOrderNo', {}, function (resp) {
+            $("input[name='orderNo']").val(resp);
+        });
+    });
+</script>
+</body>
+</html>

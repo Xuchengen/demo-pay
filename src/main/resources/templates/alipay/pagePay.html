@@ -1,187 +1,81 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="/plugins/form-field-tooltip/css/form-field-tooltip.css" rel="stylesheet">
     <title>支付宝-电脑网站支付</title>
-    <style>
-        body {
-            background-color: #EEEEEE;
-            font-family: Trebuchet MS, Lucida Sans Unicode, Arial, sans-serif;
-        }
-
-        fieldset {
-            width: 720px;
-            margin-bottom: 30px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div id="mainContainer">
-    <h1>支付宝-电脑网站支付</h1>
-    <fieldset>
-        <legend>介绍</legend>
-        <div>通过电脑网站支付功能，用户在商家 PC 网站消费后界面会自动跳转到支付宝 PC 网站收银台完成付款。 交易资金直接打入商家支付宝账户，实时到账。
-            用户交易款项即时到账，交易订单三个月内可退款，提供退款、清结算、对账等配套服务。</div>
-    </fieldset>
-
-    <fieldset>
-        <legend>操作</legend>
-        <input style="height: 40px;width: 150px;" type="button" value="随机订单号" onclick='newOrder()'/>
-        <input style="height: 40px;width: 150px;" type="button" value="发起请求" onclick='sendRequest()'/>
-    </fieldset>
-    <form id="alipay_form" autocomplete="off" method="post" action="/alipay/pagePay/doPay">
-        <fieldset>
-            <legend>公共参数</legend>
-            <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
-                <tbody>
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">支付宝网关:
-                    </td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <select style="width: 100%" name="server_url">
-                            <option value="https://openapi.alipaydev.com/gateway.do">沙箱环境</option>
-                            <option value="https://openapi.alipay.com/gateway.do">正式环境</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">支付宝公钥:
-                    </td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <textarea style="width: 100%;min-height: 120px;max-height: 120px;" id="alipay_public_key"
-                                  name="alipay_public_key" placeholder="必填">${session.alipay_public_key}</textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">商户私钥:
-                    </td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <textarea style="width: 100%;min-height: 120px;max-height: 120px;" id="merchant_private_key"
-                                  name="merchant_private_key"
-                                  placeholder="必填">${session.merchant_private_key}</textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </fieldset>
-
-        <fieldset>
-            <legend>
-                请求基本参数
-            </legend>
-            <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
-                <tbody>
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">应用ID:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="app_id" name="app_id" value="${session.app_id}"
-                               placeholder="必填,示例：2014072300007148"
-                               tooltipText="支付宝分配给开发者的应用ID<br>示例：2014072300007148">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">字符编码:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="charset" name="charset" value="utf-8" readonly>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">签名类型:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="sign_type" name="sign_type" value="RSA2" readonly>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">接口版本:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="version" name="version" value="1.0" readonly>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">通知地址:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="notify_url" name="notify_url" value="${notifyUrl}"
-                               placeholder="选填"
-                               tooltipText="支付宝服务器主动通知商户服务器里指定的页面http/https路径。">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">返回地址:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="return_url" name="return_url" value="${returnUrl}"
-                               placeholder="选填"
-                               tooltipText="支付宝服务器主动返回的页面http/https路径。">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </fieldset>
-
-        <fieldset>
-            <legend>
-                业务参数
-            </legend>
-            <table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
-                <tbody>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">商户订单号:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="out_trade_no" name="out_trade_no" placeholder="必填"
-                               tooltipText="商户订单号,64个字符以内、只能包含字母、数字、下划线；需保证在商户端不重复">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">订单标题:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="subject" name="subject" value="电脑网站支付接口测试"
-                               tooltipText="订单标题">
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="vertical-align: top; width: 25%;">订单金额:</td>
-                    <td style="vertical-align: top; width: 75%;">
-                        <input style="width: 100%;" id="total_amount" name="total_amount" value="0.01" readonly>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </fieldset>
+<div class="container">
+    <h2>支付宝-电脑网站支付</h2>
+    <hr>
+    <form class="form-horizontal" method="post" action="/alipay/pagePay/doPay">
+        <div class="form-group">
+            <label for="orderNo" class="col-sm-2 control-label">订单号</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input class="form-control" id="orderNo" name="orderNo"
+                           placeholder="订单号">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="getOrderNo">获取订单号</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subject" class="col-sm-2 control-label">商品名称</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="subject" name="subject"
+                       value="Mac book Pro 2019"
+                       placeholder="商品名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="totalAmount" class="col-sm-2 control-label">商品价格</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="totalAmount" name="totalAmount"
+                       value="0.01"
+                       placeholder="商品价格">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="notifyUrl" class="col-sm-2 control-label">异步通知地址</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="notifyUrl" name="notifyUrl"
+                       value="${notifyUrl}"
+                       placeholder="异步通知地址">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="returnUrl" class="col-sm-2 control-label">同步通知地址</label>
+            <div class="col-sm-10">
+                <input class="form-control" id="returnUrl" name="returnUrl"
+                       value="${returnUrl}"
+                       placeholder="同步通知地址">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default btn-block">确认支付</button>
+            </div>
+        </div>
     </form>
 </div>
-<script src="/plugins/form-field-tooltip/js/rounded-corners.js"></script>
-<script src="/plugins/form-field-tooltip/js/form-field-tooltip.js"></script>
-<script src="/plugins/jquery.min.js"></script>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 <script>
-    function newOrder() {
-        $.post('/common/getOrderNo', {}, function (resp) {
-            $("#out_trade_no").val(resp);
+    $("#getOrderNo").on("click", function () {
+        $.post('/common/order/getOrderNo', {}, function (resp) {
+            $("input[name='orderNo']").val(resp);
         });
-    }
-
-    function sendRequest() {
-        $("#alipay_form").submit();
-    }
-
-    var tooltipObj = new DHTMLgoodies_formTooltip();
-    tooltipObj.setTooltipPosition('right');
-    tooltipObj.imagePath = "/plugins/form-field-tooltip/images/";
-    tooltipObj.setPageBgColor('#EEEEEE');
-    tooltipObj.setTooltipCornerSize(15);
-    tooltipObj.setCloseMessage("关闭");
-    tooltipObj.setDisableTooltipMessage("关闭提示");
-    tooltipObj.initFormFieldTooltip();
+    });
 </script>
 </body>
 </html>
