@@ -1,18 +1,18 @@
 package com.github.xuchengen.web.alipay;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import cn.hutool.setting.Setting;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePagePayModel;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.alipay.api.response.AlipayTradePagePayResponse;
+import com.github.xuchengen.setting.AliPaySetting;
+import com.github.xuchengen.setting.SettingTool;
 import com.github.xuchengen.web.BaseCtl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
 import java.util.Map;
 
 /**
@@ -35,8 +34,6 @@ import java.util.Map;
 public class PagePayCtl extends BaseCtl {
 
     private static final Log log = LogFactory.get(PagePayCtl.class);
-
-    private static final String userDir = System.getProperty("user.home");
 
     @GetMapping(value = {"", "/"})
     public String index(ModelMap modelMap) {
@@ -53,21 +50,13 @@ public class PagePayCtl extends BaseCtl {
                         String notifyUrl,
                         String returnUrl) {
         try {
-            File file = new File(userDir + File.separator + ".demo-pay" + File.separator + "alipay.ini");
+            AliPaySetting aliPaySetting = SettingTool.getAliPaySetting();
 
-            if (!file.exists()) {
-                throw new RuntimeException("支付宝配置文件不存在");
-            }
-
-            Setting setting = new Setting(file.getAbsolutePath());
-
-            Map<String, String> alipay = setting.getMap("alipay");
-
-            DefaultAlipayClient client = DefaultAlipayClient.builder(alipay.get("gateway"), alipay.get("appId"), alipay.get("privateKey"))
-                    .alipayPublicKey(alipay.get("publicKey"))
-                    .charset(CharsetUtil.UTF_8)
-                    .format("JSON")
-                    .signType("RSA2")
+            DefaultAlipayClient client = DefaultAlipayClient.builder(aliPaySetting.getGateway(), aliPaySetting.getAppId(), aliPaySetting.getPrivateKey())
+                    .alipayPublicKey(aliPaySetting.getPublicKey())
+                    .charset(aliPaySetting.getCharset())
+                    .format(aliPaySetting.getFormat())
+                    .signType(aliPaySetting.getSignType())
                     .build();
 
             AlipayTradePagePayRequest alipayTradePagePayRequest = new AlipayTradePagePayRequest();
@@ -108,18 +97,10 @@ public class PagePayCtl extends BaseCtl {
                 return "fail";
             }
 
-            File file = new File(userDir + File.separator + ".demo-pay" + File.separator + "alipay.ini");
+            AliPaySetting aliPaySetting = SettingTool.getAliPaySetting();
 
-            if (!file.exists()) {
-                throw new RuntimeException("支付宝配置文件不存在");
-            }
-
-            Setting setting = new Setting(file.getAbsolutePath());
-
-            Map<String, String> alipay = setting.getMap("alipay");
-
-            boolean signResult = AlipaySignature.rsaCheckV1(paramMap, alipay.get("publicKey"),
-                    CharsetUtil.UTF_8, "RSA2");
+            boolean signResult = AlipaySignature.rsaCheckV1(paramMap, aliPaySetting.getPublicKey(),
+                    aliPaySetting.getCharset(), aliPaySetting.getSignType());
 
             if (signResult) {
                 log.info("验签通过");
