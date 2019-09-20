@@ -1,5 +1,7 @@
 package com.github.xuchengen.config;
 
+import cn.hutool.cache.impl.TimedCache;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -10,5 +12,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class GlobalConfig {
+
+    @Bean
+    public TimedCache<String, Object> timedCache() {
+        return new TimedCache<>(3600 * 24);
+    }
 
 }
