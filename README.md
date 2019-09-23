@@ -48,12 +48,12 @@
 您的赞助将用于购买IDEA等开发工具正版序列号，并进行共享。
 <p align="center">
     <a href="https://github.com/Xuchengen/demo-pay/blob/master/asset/unionpay.jpeg" target="_blank">
-        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/unionpay.jpeg" width="50%" alt="银联支付">
+        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/unionpay.jpeg" width="30%" alt="银联支付">
     </a>
     <a href="https://github.com/Xuchengen/demo-pay/blob/master/asset/wechat.jpeg" target="_blank">
-        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/wechat.jpeg" width="50%" alt="微信支付">
+        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/wechat.jpeg" width="30%" alt="微信支付">
     </a>
     <a href="https://github.com/Xuchengen/demo-pay/blob/master/asset/alipay.jpeg" target="_blank">
-        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/alipay.jpeg" width="50%" alt="支付宝">
+        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/alipay.jpeg" width="30%" alt="支付宝">
     </a>
 </p>
