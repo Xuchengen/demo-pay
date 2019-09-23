@@ -43,3 +43,17 @@
 * <a href="https://github.com/Javen205/IJPay" title="IJPay让支付触手可及">IJPay</a>
 
 以上排名不分先后。
+
+## 友情赞助
+您的赞助将用于购买IDEA等开发工具正版序列号，并进行共享。
+<p align="center">
+    <a href="https://github.com/Xuchengen/demo-pay/blob/master/asset/unionpay.jpeg" target="_blank">
+        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/unionpay.jpeg" width="50%" alt="银联支付">
+    </a>
+    <a href="https://github.com/Xuchengen/demo-pay/blob/master/asset/wechat.jpeg" target="_blank">
+        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/wechat.jpeg" width="50%" alt="微信支付">
+    </a>
+    <a href="https://github.com/Xuchengen/demo-pay/blob/master/asset/alipay.jpeg" target="_blank">
+        <img src="https://github.com/Xuchengen/demo-pay/blob/master/asset/alipay.jpeg" width="50%" alt="支付宝">
+    </a>
+</p>

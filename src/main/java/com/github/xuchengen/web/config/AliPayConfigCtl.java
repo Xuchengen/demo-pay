@@ -31,7 +31,7 @@ public class AliPayConfigCtl extends BaseCtl {
 
         SettingTool.save("alipay.json", aliPaySetting);
 
-        return "redirect:/";
+        return "redirect:/config/alipay";
     }
 
 }

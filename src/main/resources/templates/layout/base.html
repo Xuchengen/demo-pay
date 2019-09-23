@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>支付演示</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/plugins/bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/plugins/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="/plugins/AdminLTE/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/plugins/AdminLTE/css/skins/_all-skins.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/plugins/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/plugins/bootstrap3/js/bootstrap.min.js"></script>
+    <script src="/plugins/fastclick/fastclick.js"></script>
+    <script src="/plugins/AdminLTE/js/adminlte.min.js"></script>
+    <script src="/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+</head>
+<body class="hold-transition skin-blue fixed" data-spy="scroll" data-target="#scrollspy">
+<div class="wrapper">
+    <!-- 顶部导航栏-开始 -->
+    <header class="main-header">
+        <a href="/" class="logo">
+            <span class="logo-mini"><b>支</b></span>
+            <span class="logo-lg">支付演示</span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">切换导航</span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://www.xuchengen.cn">徐叔科技</a></li>
+                    <li><a href="https://adminlte.io/">AdminLTE</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- 顶部导航栏-开始 -->
+
+    <!-- 左侧导航栏-开始 -->
+    <aside class="main-sidebar">
+        <section class="sidebar" id="scrollspy">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">系统导航</li>
+                <li class="active treeview menu-open">
+                    <a href="#">
+                        <span>支付宝</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/config/alipay/">支付宝配置</a></li>
+                        <li><a href="/alipay/pagePay/">电脑网站支付</a></li>
+                        <li><a href="/alipay/wapPay/">手机网站支付</a></li>
+                        <li><a href="/alipay/scanCodePay/">扫码支付（主扫）</a></li>
+                        <li><a href="/alipay/barcodePay/">条码支付（被扫）</a></li>
+                        <li><a href="/alipay/appPay/">APP支付</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <!-- 左侧导航栏-结束 -->
+
+    <!-- 主体-开始 -->
+    <div class="content-wrapper">
+        <!-- 面包屑导航-开始 -->
+        <section class="content-header">
+            <h1>${title!}</h1>
+            <ol class="breadcrumb">
+                <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li class="active">${title!}</li>
+            </ol>
+        </section>
+        <!-- 面包屑导航-结束 -->
+        <!-- 主体内容-开始 -->
+        <section class="content">
+            ${__CONTENT__!}
+        </section>
+        <!-- 主体内容-结束 -->
+    </div>
+    <!-- 主体-结束 -->
+
+    <!-- 底部版权-开始 -->
+    <footer class="main-footer">
+        <div class="text-center">
+            <span><strong>Copyright &copy; 2019-${date(),dateFormat="yyyy"} <a href="https://www.xuchengen.cn">徐叔科技</a>.</strong> All rights reserved.</span>
+        </div>
+    </footer>
+    <!-- 底部版权-结束 -->
+
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
