@@ -1,0 +1,69 @@
+@layout("../layout/base.html",{title:"支付宝-交易退款"},"__CONTENT__"){
+<form class="form-horizontal" id="myForm">
+    <div class="form-group">
+        <label for="outRequestNo" class="col-sm-2 control-label">退款订单号</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input class="form-control" id="outRequestNo" name="outRequestNo"
+                       placeholder="退款订单号">
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="getOrderNo">获取订单号</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="outTradeNo" class="col-sm-2 control-label">原商户订单号</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="outTradeNo" name="outTradeNo"
+                   placeholder="原商户订单号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="tradeNo" class="col-sm-2 control-label">支付宝交易号</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="tradeNo" name="tradeNo"
+                   placeholder="支付宝交易号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="refundAmount" class="col-sm-2 control-label">退款金额</label>
+        <div class="col-sm-8">
+            <input class="form-control" type="number" id="refundAmount" name="refundAmount"
+                   value="0.01"
+                   placeholder="退款金额">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="refundReason" class="col-sm-2 control-label">退款原因</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="refundReason" name="refundReason"
+                   placeholder="退款原因">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="button" class="btn btn-default btn-block" id="doRefund">确认退款</button>
+        </div>
+    </div>
+</form>
+<script>
+    $("#getOrderNo").on("click", function () {
+        $.post('/common/order/getOrderNo', {}, function (resp) {
+            $("input[name='outRequestNo']").val(resp);
+        });
+    });
+
+    $("#doRefund").on("click", function () {
+        var data = $("#myForm").serializeArray();
+        $.post("/alipay/refund/doRefund", data, function (resp) {
+            if (resp.code === "200") {
+                alert("操作成功");
+                window.location.reload();
+            } else {
+                alert(resp.data);
+            }
+        });
+    });
+</script>
+@}

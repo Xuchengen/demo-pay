@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/alipay/scanCodePay")
-public class ScanCodePayCtl extends BaseCtl {
+public class AliPayScanCodePayCtl extends BaseCtl {
 
-    private static final Log log = LogFactory.get(ScanCodePayCtl.class);
+    private static final Log log = LogFactory.get(AliPayScanCodePayCtl.class);
 
     @GetMapping(value = {"", "/"})
     public String index(ModelMap modelMap) {
@@ -63,7 +63,7 @@ public class ScanCodePayCtl extends BaseCtl {
             alipayTradePrecreateRequest.setBizModel(alipayTradePrecreateModel);
 
             AlipayTradePrecreateResponse alipayTradePrecreateResponse = client.execute(alipayTradePrecreateRequest);
-
+            log.info("支付宝扫码支付响应参数：{}", JSONUtil.toJsonStr(alipayTradePrecreateResponse));
             if (alipayTradePrecreateResponse.isSuccess()) {
                 return alipayTradePrecreateResponse.getQrCode();
             } else {

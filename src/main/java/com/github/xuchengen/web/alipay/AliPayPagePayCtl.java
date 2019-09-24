@@ -1,8 +1,8 @@
 package com.github.xuchengen.web.alipay;
 
+import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.alipay.api.AlipayApiException;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePagePayModel;
 import com.alipay.api.request.AlipayTradePagePayRequest;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/alipay/pagePay")
-public class PagePayCtl extends BaseCtl {
+public class AliPayPagePayCtl extends BaseCtl {
 
-    private static final Log log = LogFactory.get(PagePayCtl.class);
+    private static final Log log = LogFactory.get(AliPayPagePayCtl.class);
 
     @GetMapping(value = {"", "/"})
     public String index(ModelMap modelMap) {
@@ -66,13 +66,14 @@ public class PagePayCtl extends BaseCtl {
             alipayTradePagePayRequest.setBizModel(alipayTradePagePayModel);
 
             AlipayTradePagePayResponse alipayTradePagePayResponse = client.pageExecute(alipayTradePagePayRequest);
-
+            log.info("支付宝电脑网站支付响应参数：{}", JSONUtil.toJsonStr(alipayTradePagePayResponse));
             if (alipayTradePagePayResponse.isSuccess()) {
                 return alipayTradePagePayResponse.getBody();
             } else {
                 throw new RuntimeException("调用支付宝电脑网站支付失败");
             }
-        } catch (AlipayApiException e) {
+        } catch (Exception e) {
+            log.error("调用支付宝电脑网站支付接口异常：{}", JSONUtil.toJsonStr(e));
             throw new RuntimeException("支付宝电脑网站支付异常", e);
         }
     }

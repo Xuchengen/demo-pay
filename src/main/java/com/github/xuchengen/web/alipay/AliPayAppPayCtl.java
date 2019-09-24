@@ -1,9 +1,9 @@
 package com.github.xuchengen.web.alipay;
 
 import cn.hutool.cache.impl.TimedCache;
+import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.alipay.api.AlipayApiException;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
@@ -30,9 +30,9 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/alipay/appPay")
-public class AppPayCtl extends BaseCtl {
+public class AliPayAppPayCtl extends BaseCtl {
 
-    private static final Log log = LogFactory.get(AppPayCtl.class);
+    private static final Log log = LogFactory.get(AliPayAppPayCtl.class);
 
     @Resource(name = "timedCache")
     public TimedCache<String, Object> timedCache;
@@ -73,7 +73,7 @@ public class AppPayCtl extends BaseCtl {
             alipayTradeAppPayRequest.setBizModel(alipayTradeAppPayModel);
 
             AlipayTradeAppPayResponse alipayTradeAppPayResponse = client.sdkExecute(alipayTradeAppPayRequest);
-
+            log.info("支付宝APP支付响应参数：{}", JSONUtil.toJsonStr(alipayTradeAppPayResponse));
             if (alipayTradeAppPayResponse.isSuccess()) {
                 String payUrl = alipayTradeAppPayResponse.getBody();
                 Map<String, Object> paramsMap = new HashMap<>();
@@ -87,7 +87,8 @@ public class AppPayCtl extends BaseCtl {
             } else {
                 throw new RuntimeException("调用支付宝APP支付失败");
             }
-        } catch (AlipayApiException e) {
+        } catch (Exception e) {
+            log.error("调用支付宝APP支付接口异常：{}", JSONUtil.toJsonStr(e));
             throw new RuntimeException("支付宝APP支付异常", e);
         }
     }

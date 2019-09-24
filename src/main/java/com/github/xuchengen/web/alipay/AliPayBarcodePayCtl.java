@@ -3,7 +3,6 @@ package com.github.xuchengen.web.alipay;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.alipay.api.AlipayApiException;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
 import com.alipay.api.request.AlipayTradePayRequest;
@@ -28,9 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/alipay/barcodePay")
-public class BarcodePayCtl extends BaseCtl {
+public class AliPayBarcodePayCtl extends BaseCtl {
 
-    public static final Log log = LogFactory.get(BarcodePayCtl.class);
+    public static final Log log = LogFactory.get(AliPayBarcodePayCtl.class);
 
     @GetMapping(value = {"", "/"})
     public String index(ModelMap modelMap) {
@@ -72,7 +71,7 @@ public class BarcodePayCtl extends BaseCtl {
             } else {
                 return ResponseResult.fail(response.getMsg());
             }
-        } catch (AlipayApiException e) {
+        } catch (Exception e) {
             log.error("调用支付宝条码支付接口异常：{}", JSONUtil.toJsonStr(e));
             return ResponseResult.error();
         }

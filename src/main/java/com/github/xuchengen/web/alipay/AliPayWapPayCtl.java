@@ -1,8 +1,8 @@
 package com.github.xuchengen.web.alipay;
 
+import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.alipay.api.AlipayApiException;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeWapPayModel;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
@@ -25,9 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping(value = "/alipay/wapPay")
-public class WapPayCtl extends BaseCtl {
+public class AliPayWapPayCtl extends BaseCtl {
 
-    private static final Log log = LogFactory.get(WapPayCtl.class);
+    private static final Log log = LogFactory.get(AliPayWapPayCtl.class);
 
     @GetMapping(value = {"", "/"})
     public String index(ModelMap modelMap) {
@@ -75,13 +75,14 @@ public class WapPayCtl extends BaseCtl {
             alipayTradeWapPayRequest.setBizModel(alipayTradeWapPayModel);
 
             AlipayTradeWapPayResponse alipayTradeWapPayResponse = client.pageExecute(alipayTradeWapPayRequest);
-
+            log.info("支付宝手机网站支付响应参数：{}", JSONUtil.toJsonStr(alipayTradeWapPayResponse));
             if (alipayTradeWapPayResponse.isSuccess()) {
                 return alipayTradeWapPayResponse.getBody();
             } else {
                 throw new RuntimeException("调用支付宝手机网站支付失败");
             }
-        } catch (AlipayApiException e) {
+        } catch (Exception e) {
+            log.error("调用支付宝手机网站支付接口异常：{}", JSONUtil.toJsonStr(e));
             throw new RuntimeException("支付宝手机网站支付异常", e);
         }
     }
