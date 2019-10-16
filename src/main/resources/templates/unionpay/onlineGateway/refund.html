@@ -1,0 +1,62 @@
+@layout("/layout/base.html",{title:"银联-在线网关支付退货接口"},"__CONTENT__"){
+<form id="myForm" class="form-horizontal">
+    <div class="form-group">
+        <label for="orderNo" class="col-sm-2 control-label">订单号</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input class="form-control" id="orderNo" name="orderNo"
+                       placeholder="订单号">
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="getOrderNo">获取订单号</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="origNo" class="col-sm-2 control-label">原交易号</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="origNo" name="origNo"
+                   value=""
+                   placeholder="原交易号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="totalAmount" class="col-sm-2 control-label">商品价格</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="totalAmount" name="totalAmount"
+                   value="1"
+                   placeholder="商品价格">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="notifyUrl" class="col-sm-2 control-label">异步通知地址</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="notifyUrl" name="notifyUrl"
+                   value="${notifyUrl}"
+                   placeholder="异步通知地址">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="button" class="btn btn-default btn-block" id="cancelBtn">确认撤销</button>
+        </div>
+    </div>
+</form>
+<script>
+    $("#getOrderNo").on("click", function () {
+        $.post('/common/order/getOrderNo', {}, function (resp) {
+            $("input[name='orderNo']").val(resp);
+        });
+    });
+
+    $("#cancelBtn").on("click", function () {
+        var data = $("#myForm").serializeArray();
+        $.post('/unionPay/onlineGatewayPay/refund/doRefund', data, function (resp) {
+            alert(resp.msg);
+            setTimeout(function () {
+                window.location.reload();
+            });
+        });
+    });
+</script>
+@}

@@ -1,0 +1,48 @@
+@layout("/layout/base.html",{title:"银联-在线网关支付加密证书更新接口"},"__CONTENT__"){
+<form class="form-horizontal" id="myForm">
+    <div class="form-group">
+        <label for="orderNo" class="col-sm-2 control-label">订单号</label>
+        <div class="col-sm-8">
+            <div class="input-group">
+                <input class="form-control" id="orderNo" name="orderNo"
+                       placeholder="订单号">
+                <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="getOrderNo">获取订单号</button>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="button" class="btn btn-default btn-block" id="updateBtn">更新</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="codeView" class="col-sm-2 control-label">加密证书</label>
+        <div class="col-sm-8">
+            <textarea id="codeView" class="form-control" readonly rows="8"></textarea>
+        </div>
+    </div>
+</form>
+<script>
+    $("#getOrderNo").on("click", function () {
+        $.post('/common/order/getOrderNo', {}, function (resp) {
+            $("input[name='orderNo']").val(resp);
+        });
+    });
+
+    $("#updateBtn").on("click", function () {
+        var data = $("#myForm").serializeArray();
+        $.post('/unionPay/onlineGatewayPay/encryptCertUpdate/doUpdate', data, function (resp) {
+            if (resp.code === '200') {
+                $("#codeView").val(resp.data);
+            } else {
+                alert(resp.msg);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1500);
+            }
+        });
+    });
+</script>
+@}

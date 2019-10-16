@@ -1,0 +1,47 @@
+@layout("/layout/base.html",{title:"银联-在线网关支付交易查询接口"},"__CONTENT__"){
+<form class="form-horizontal" id="myForm">
+    <div class="form-group">
+        <label for="orderNo" class="col-sm-2 control-label">订单号</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="orderNo" name="orderNo"
+                   value=""
+                   placeholder="订单号">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="button" class="btn btn-default btn-block" id="queryBtn">查询</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <pre id="codeView" style="height: 400px"></pre>
+        </div>
+    </div>
+</form>
+<script src="/plugins/ace/ace.js"></script>
+<script>
+    var editor = ace.edit("codeView", {
+        theme: "ace/theme/eclipse",
+        mode: "ace/mode/java",
+        fontSize: 17,
+        foldStyle: "manual",
+        showPrintMargin: false,
+        readOnly: true
+    });
+
+    $("#queryBtn").on("click", function () {
+        var data = $("#myForm").serializeArray();
+        $.post('/unionPay/onlineGatewayPay/query/doQuery', data, function (resp) {
+            if (resp.code === '200') {
+                editor.setValue(resp.data);
+            } else {
+                alert(resp.msg);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1500);
+            }
+        });
+    });
+</script>
+@}

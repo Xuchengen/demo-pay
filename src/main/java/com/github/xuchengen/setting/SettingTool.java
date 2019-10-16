@@ -45,4 +45,12 @@ public class SettingTool {
         return new AliPaySetting();
     }
 
+    public static UnionPaySetting getUnionPaySetting() {
+        UnionPaySetting unionPaySetting = get("unionPay.json", UnionPaySetting.class);
+        if (null != unionPaySetting) {
+            return unionPaySetting;
+        }
+        return new UnionPaySetting();
+    }
+
 }

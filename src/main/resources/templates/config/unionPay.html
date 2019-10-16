@@ -1,0 +1,145 @@
+@layout("../layout/base.html",{title:"银联全渠道配置"},"__CONTENT__"){
+<form class="form-horizontal" method="post" action="/config/unionPay/doSave">
+    <div class="form-group">
+        <label for="certVersion" class="col-sm-2 control-label">证书版本</label>
+        <div class="col-sm-8">
+            <select id="certVersion" name="certVersion" class="form-control">
+                <option value="5.0.0" ${has(bean) && bean.certVersion == '5.0.0' ? 'selected' : ''}>V5.0.0</option>
+                <option value="5.1.0" ${has(bean) && bean.certVersion == '5.1.0' ? 'selected' : ''}>V5.1.0</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="env" class="col-sm-2 control-label">系统环境</label>
+        <div class="col-sm-8">
+            <select id="env" name="env" class="form-control">
+                <option value="test" ${has(bean) && bean.env == 'dev' ? 'selected' : ''}>测试环境</option>
+                <option value="prod" ${has(bean) && bean.env == 'prod' ? 'selected' : ''}>正式环境</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="merchantId" class="col-sm-2 control-label">商户ID</label>
+        <div class="col-sm-8">
+            <input class="form-control" id="merchantId" name="merchantId"
+                   value="${bean.merchantId!}"
+                   placeholder="商户ID">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="charset" class="col-sm-2 control-label">字符编码</label>
+        <div class="col-sm-8">
+            <select id="charset" name="charset" class="form-control">
+                <option value="UTF-8" ${has(bean) && bean.charset == 'UTF-8' ? 'selected' : ''}>UTF-8</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="encryptKey" class="col-sm-2 control-label">敏感加密证书</label>
+        <div class="col-sm-8">
+                <textarea class="form-control" id="encryptKey"
+                          name="encryptKey"
+                          placeholder="敏感加密证书" rows="5">${bean.encryptKey!}</textarea>
+        </div>
+    </div>
+    <div id="v500" style="display: none;">
+        <div class="form-group">
+            <label for="v500.certId" class="col-sm-2 control-label">证书序列号</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="v500.certId" name="unionPayV500Config.certId"
+                       value="${bean.unionPayV500Config.certId!}"
+                       placeholder="证书序列号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="v500.merchantPrivateKey" class="col-sm-2 control-label">商户私钥</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="v500.merchantPrivateKey"
+                          name="unionPayV500Config.merchantPrivateKey"
+                          placeholder="商户私钥" rows="5">${bean.unionPayV500Config.merchantPrivateKey!}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="v500.merchantPublicKey" class="col-sm-2 control-label">商户公钥</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="v500.merchantPublicKey"
+                          name="unionPayV500Config.merchantPublicKey"
+                          placeholder="商户公钥" rows="5">${bean.unionPayV500Config.merchantPublicKey!}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="v500.unionPayPublicKey" class="col-sm-2 control-label">银联公钥</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="v500.unionPayPublicKey"
+                          name="unionPayV500Config.unionPayPublicKey"
+                          placeholder="银联公钥" rows="5">${bean.unionPayV500Config.unionPayPublicKey!}</textarea>
+            </div>
+        </div>
+    </div>
+    <div id="v510" style="display: none;">
+        <div class="form-group">
+            <label for="v510.certId" class="col-sm-2 control-label">证书序列号</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="v510.certId" name="unionPayV510Config.certId"
+                       value="${bean.unionPayV510Config.certId!}"
+                       placeholder="证书序列号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="v510.merchantPrivateKey" class="col-sm-2 control-label">商户私钥</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="v510.merchantPrivateKey"
+                          name="unionPayV510Config.merchantPrivateKey"
+                          placeholder="商户私钥" rows="5">${bean.unionPayV510Config.merchantPrivateKey!}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="v510.merchantPublicKey" class="col-sm-2 control-label">商户公钥</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="v510.merchantPublicKey"
+                          name="unionPayV510Config.merchantPublicKey"
+                          placeholder="商户公钥" rows="5">${bean.unionPayV510Config.merchantPublicKey!}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="rootKey" class="col-sm-2 control-label">根证书</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="rootKey"
+                          name="unionPayV510Config.rootKey"
+                          placeholder="根证书" rows="5">${bean.unionPayV510Config.rootKey!}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middelKey" class="col-sm-2 control-label">中级证书</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="middelKey"
+                          name="unionPayV510Config.middelKey"
+                          placeholder="中级证书" rows="5">${bean.unionPayV510Config.middelKey!}</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button type="submit" class="btn btn-default btn-block">保存</button>
+        </div>
+    </div>
+</form>
+<script>
+    certVersionChange();
+
+    $("#certVersion").on("change", function () {
+        certVersionChange();
+    });
+
+    function certVersionChange() {
+        var certVersion = $("#certVersion").val();
+        if (certVersion === "5.0.0") {
+            $("#v500").show();
+            $("#v510").hide();
+        } else if (certVersion === "5.1.0") {
+            $("#v510").show();
+            $("#v500").hide();
+        }
+    }
+</script>
+@}

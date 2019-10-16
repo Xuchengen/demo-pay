@@ -14,6 +14,11 @@ public class AliPaySetting {
     private String gateway;
 
     /**
+     * 商户ID
+     */
+    private String merchantId;
+
+    /**
      * 商户应用ID
      */
     private String appId;
@@ -49,6 +54,15 @@ public class AliPaySetting {
 
     public void setGateway(String gateway) {
         this.gateway = gateway;
+    }
+
+    public String getMerchantId() {
+        return merchantId;
+    }
+
+    public AliPaySetting setMerchantId(String merchantId) {
+        this.merchantId = merchantId;
+        return this;
     }
 
     public String getAppId() {

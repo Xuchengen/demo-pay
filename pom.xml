@@ -99,6 +99,13 @@
             <version>3.4.0</version>
         </dependency>
 
+        <!-- 银联全渠道 -->
+        <dependency>
+            <groupId>com.github.xuchengen</groupId>
+            <artifactId>X-UnionPay</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -15,7 +15,8 @@ public class GlobalConfig {
 
     @Bean
     public TimedCache<String, Object> timedCache() {
-        return new TimedCache<>(3600 * 24);
+        //缓存24小时
+        return new TimedCache<>(1000L * 60L * 60L * 24L);
     }
 
 }

@@ -3,12 +3,10 @@ package com.github.xuchengen.web.alipay;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.AlipayClient;
 import com.alipay.api.domain.AlipayTradePayModel;
 import com.alipay.api.request.AlipayTradePayRequest;
 import com.alipay.api.response.AlipayTradePayResponse;
-import com.github.xuchengen.setting.AliPaySetting;
-import com.github.xuchengen.setting.SettingTool;
 import com.github.xuchengen.support.response.ResponseResult;
 import com.github.xuchengen.tool.OrderNoTool;
 import com.github.xuchengen.web.BaseCtl;
@@ -43,14 +41,7 @@ public class AliPayBarcodePayCtl extends BaseCtl {
                                 String amount,
                                 String barcodeValue) {
         try {
-            AliPaySetting aliPaySetting = SettingTool.getAliPaySetting();
-
-            DefaultAlipayClient client = DefaultAlipayClient.builder(aliPaySetting.getGateway(), aliPaySetting.getAppId(), aliPaySetting.getPrivateKey())
-                    .alipayPublicKey(aliPaySetting.getPublicKey())
-                    .charset(aliPaySetting.getCharset())
-                    .format(aliPaySetting.getFormat())
-                    .signType(aliPaySetting.getSignType())
-                    .build();
+            AlipayClient client = getAlipayClient();
 
             AlipayTradePayRequest alipayTradePayRequest = new AlipayTradePayRequest();
             alipayTradePayRequest.setNotifyUrl(getHostUrl() + "/alipay/doNotify");

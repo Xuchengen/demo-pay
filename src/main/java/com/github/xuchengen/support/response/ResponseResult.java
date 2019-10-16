@@ -54,7 +54,7 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> ok(T data) {
-        return newInstance(data, "200", "success");
+        return newInstance(data, "200", "成功");
     }
 
     public static <T> ResponseResult<T> ok() {
@@ -62,7 +62,7 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> fail(T data) {
-        return newInstance(data, "400", "fail");
+        return newInstance(data, "400", "失败");
     }
 
     public static <T> ResponseResult<T> fail() {
@@ -70,7 +70,7 @@ public class ResponseResult<T> implements Serializable {
     }
 
     public static <T> ResponseResult<T> error(T data) {
-        return newInstance(data, "500", "error");
+        return newInstance(data, "500", "异常");
     }
 
     public static <T> ResponseResult<T> error() {
